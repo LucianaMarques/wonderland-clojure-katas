@@ -14,9 +14,15 @@
     (is (> (.indexOf ranks :king) (.indexOf ranks :queen))))
   (testing "aces are higher rank than kings"
     (is (> (.indexOf ranks :ace) (.indexOf ranks :king))))
-  (testing "if the ranks are equal, clubs beat spades")
-  (testing "if the ranks are equal, diamonds beat clubs")
-  (testing "if the ranks are equal, hearts beat diamonds"))
+  (testing "if the ranks are equal, clubs beat spades"
+    (is (= [:club :king]
+           (play-round [:spade :king] [:club :king]))))
+  (testing "if the ranks are equal, diamonds beat clubs"
+    (is (= [:diamond :jack]
+           (play-round [:diamond :jack] [:club :jack]))))
+  (testing "if the ranks are equal, hearts beat diamonds"
+    (is (= [:heart :ace]
+           (play-round [:heart :ace] [:diamond :ace])))))
 
 (deftest test-play-game
   (testing "the player loses when they run out of cards"))
