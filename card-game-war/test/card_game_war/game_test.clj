@@ -8,9 +8,12 @@
   (testing "the highest rank wins the cards in the round"
     (is (= [:heart :queen]
            (play-round [:heart :queen] [:heart :jack]))))
-  (testing "queens are higher rank than jacks")
-  (testing "kings are higher rank than queens")
-  (testing "aces are higher rank than kings")
+  (testing "queens are higher rank than jacks"
+    (is (> (.indexOf ranks :queen) (.indexOf ranks :jack))))
+  (testing "kings are higher rank than queens"
+    (is (> (.indexOf ranks :king) (.indexOf ranks :queen))))
+  (testing "aces are higher rank than kings"
+    (is (> (.indexOf ranks :ace) (.indexOf ranks :king))))
   (testing "if the ranks are equal, clubs beat spades")
   (testing "if the ranks are equal, diamonds beat clubs")
   (testing "if the ranks are equal, hearts beat diamonds"))
