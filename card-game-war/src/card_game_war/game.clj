@@ -24,9 +24,11 @@
   (def rank1 (get-rank player1-card))
   (def rank2 (get-rank player2-card))
   (if (and (= suit1 suit2) (= rank1 rank2))
-    (play-tie-round player1-card player2-card))
-  (if (> rank1 rank2) rank1 rank2)
-  (if (> suit1 suit2) suit1 suit2))
+    (play-tie-round player1-card player2-card)
+    (if (> rank1 rank2) player1-card
+                        (if (= rank1 rank2)
+                          (if (> suit1 suit2) player1-card player2-card)
+                        player2-card))))
 
 (defn play-game [player1-cards player2-cards]
   (map play-round player1-cards player2-cards))
