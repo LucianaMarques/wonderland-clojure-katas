@@ -7,14 +7,14 @@
     (char temp_res)
     (char (+ (int (rem temp_res (int \z))) (- (int \a) 1)))))
 
-(defn concat_keyword_recursive [keyword times]
+(defn concat_keyword [keyword times]
   (if (= times 1)
     (str keyword)
-    (concat_keyword_recursive (str keyword keyword) (- times 1))))
+    (concat_keyword (str keyword keyword) (- times 1))))
 
 (defn create_repeated_keyword [keyword size]
   (def max_size (int (+ (rem (count keyword) size) (/ (count keyword) size))))
-  (take size (concat_keyword_recursive keyword max_size)))
+  (take size (concat_keyword keyword max_size)))
 
 (defn encode [keyword message]
   (def keyword_seq (create_repeated_keyword keyword (count message)))
