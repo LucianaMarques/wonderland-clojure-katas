@@ -31,19 +31,32 @@
 (defn create_letter_map []
   {})
 
+(defn concat_keyword [keyword times]
+  (if (= times 1)
+    (str keyword)
+    (concat_keyword (str keyword keyword) (- times 1))))
+
+(concat_keyword "stone" 2)
+
 (defn create_repeated_keyword [keyword size]
-  "keyword")
+  (def keyword_seq (seq keyword))
+  (take size (concat_keyword keyword size)))
+
+;; (take size (for [char keyword_seq] (int char)))))
+
+(create_repeated_keyword "abc" 1)
+
+(create_repeated_keyword "abc" 5)
 
 
 ;; create repeated keyword string
 ;; create string map
 ;; access string map by keyword and message string
 ;; return it
+;; (def m (str/split message #""))
 
 (defn encode [keyword message]
-  ;; (def m (count (str/split message #"")))
-
-  )
+  (int (first (seq message))))
 
 (encode "key" "ma")
 
