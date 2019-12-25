@@ -1,33 +1,6 @@
 (ns alphabet-cipher.coder)
 (require '[clojure.string :as str])
 
-(def letter_map {:a "abcdefghijklmnopqrstuvwxyz"
-                 :b "bcdefghijklmnopqrstuvwxyza"
-                 :c "cdefghijklmnopqrstuvwxyzab"
-                 :d "defghijklmnopqrstuvwxyzabc"
-                 :e "efghijklmnopqrstuvwxyzabcd"
-                 :f "fghijklmnopqrstuvwxyzabcde"
-                 :g "ghijklmnopqrstuvwxyzabcdef"
-                 :h "hijklmnopqrstuvwxyzabcdefg"
-                 :i "ijklmnopqrstuvwxyzabcdefgh"
-                 :j "jklmnopqrstuvwxyzabcdefghi"
-                 :k "klmnopqrstuvwxyzabcdefghij"
-                 :l "lmnopqrstuvwxyzabcdefghijk"
-                 :m "mnopqrstuvwxyzabcdefghijkl"
-                 :n "nopqrstuvwxyzabcdefghijklm"
-                 :o "opqrstuvwxyzabcdefghijklmn"
-                 :p "pqrstuvwxyzabcdefghijklmno"
-                 :q "qrstuvwxyzabcdefghijklmnop"
-                 :r "rstuvwxyzabcdefghijklmnopq"
-                 :s "stuvwxyzabcdefghijklmnopqr"
-                 :t "tuvwxyzabcdefghijklmnopqrs"
-                 :u "uvwxyzabcdefghijklmnopqrst"
-                 :v "vwxyzabcdefghijklmnopqrstu"
-                 :w "wxyzabcdefghijklmnopqrstuv"
-                 :x "xyzabcdefghijklmnopqrstuvw"
-                 :y "yzabcdefghijklmnopqrstuvwx"
-                 :z "zabcdefghijklmnopqrstuvwxy"})
-
 (defn get_letter [column row]
   (def temp_res (+ (int column) (- (int row) (int \a))))
   (if (<= temp_res (int \z))
