@@ -1,7 +1,7 @@
 (ns alphabet-cipher.coder)
 (require '[clojure.string :as str])
 
-(defn get_letter [column row]
+(defn get_encoded_letter [column row]
   (def temp_res (+ (int column) (- (int row) (int \a))))
   (if (<= temp_res (int \z))
     (char temp_res)
@@ -18,10 +18,17 @@
 
 (defn encode [keyword message]
   (def keyword_seq (create_repeated_keyword keyword (count message)))
-  (apply str (map get_letter keyword_seq message)))
+  (apply str (map get_encoded_letter keyword_seq message)))
+
+(defn get_decoded_letter [column encoded_letter]
+  (if (<= (int column) (int encoded_letter))
+    (char (+ (int \a) (- (int encoded_letter) (int column))))
+    (char (+ (+ (int \a) 1) (+ (- (int \z) (int column)) (- (int encoded_letter) (int \a)))))
+  ))
 
 (defn decode [keyword message]
-  "decodeme")
+  (def keyword_seq (create_repeated_keyword keyword (count message)))
+  (apply str (map get_decoded_letter keyword_seq message)))
 
 (defn decipher [cipher message]
   "decypherme")
