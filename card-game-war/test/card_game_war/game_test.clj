@@ -28,5 +28,4 @@
   (testing "the player loses when they run out of cards"
     (is (= "Player 1 wins")
         (play-game '([:diamond :king] [:club 3] [:heart 7])
-                   '([:spade :jack] [:club 2] [:heart 3]) 1)
-        )))
+                   '([:spade :jack] [:club 2] [:heart 3]) 1))))
