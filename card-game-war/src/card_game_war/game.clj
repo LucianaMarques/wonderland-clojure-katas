@@ -8,6 +8,10 @@
         rank ranks]
     [suit rank]))
 
+;; my chosen tie criteria:
+;; if one of the players have less than 3 cards available, he/she loses regardless of the other's cards
+;; if both of them face the same situation, the winner is the one with currently more cards
+
 (defn- play-tie-round [card1 card2]
   (println card1)
   (println card2))
