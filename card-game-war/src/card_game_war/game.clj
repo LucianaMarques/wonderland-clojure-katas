@@ -19,12 +19,7 @@
 (defn- get-rank [card]
   (.indexOf ranks (peek card)))
 
-(defn- get-suit [card]
-  (.indexOf suits (first card)))
-
 (defn play-round [player1-card player2-card]
-  (def suit1 (get-suit player1-card))
-  (def suit2 (get-suit player2-card))
   (def rank1 (get-rank player1-card))
   (def rank2 (get-rank player2-card))
   (cond
