@@ -59,6 +59,3 @@
     (empty? player1-cards) "Player 2 wins"
     (empty? player2-cards) "Player 1 wins"
     :else (play-turn player1-cards player2-cards (+ turn 1))))
-
-(play-game '([:diamond :king] [:club 3] [:heart 7])
-           '([:spade :jack] [:club 2] [:heart 3]) 1)
