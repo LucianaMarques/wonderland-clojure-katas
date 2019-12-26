@@ -31,4 +31,18 @@
                         player2-card))))
 
 (defn play-game [player1-cards player2-cards]
-  (map play-round player1-cards player2-cards))
+  (def first-card (peek player1-cards))
+  (def second-card (peek player2-cards))
+  (def winning-card (play-round first-card second-card))
+  (if (= first-card nil)
+    "Player 2 wins"
+    (if (= second-card nil)
+      "Player 1 wins"
+      (if (= winning-card first-card)
+        (play-game (conj (rest player1-cards) first-card second-card)
+                   (rest player2-cards))
+        (play-game (rest player1-cards)
+                   (conj (rest player2-cards) first-card second-card))))))
+
+(play-game '([:diamond :king] [:club 3] [:heart 7])
+           '([:spade :jack] [:club 2] [:heart :ace]))
