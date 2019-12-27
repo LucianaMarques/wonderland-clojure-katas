@@ -8,10 +8,6 @@
         rank ranks]
     [suit rank]))
 
-(defn- play-tie-round [card1 card2]
-  (println card1)
-  (println card2))
-
 (defn- get-rank [card]
   (.indexOf ranks (peek card)))
 
@@ -19,7 +15,6 @@
   (def rank1 (get-rank player1-card))
   (def rank2 (get-rank player2-card))
   (cond
-    (and (= suit1 suit2) (= rank1 rank2)) (play-tie-round player1-card player2-card)
     (> rank1 rank2) player1-card
     (< rank1 rank2) player2-card
     :else nil))
@@ -29,7 +24,6 @@
 
 (defn- play-turn [player1-cards player2-cards turn cards-to-add]
   (println "Turn " turn)
-  (if (empty? (rest player1-cards)) "Player 2 wins"
   (println "Player 1 cards " player1-cards)
   (println "Player 2 cards " player2-cards)
   (def player1-card (first player1-cards))
@@ -38,7 +32,7 @@
   (println "Round result: " winning-card)
   (cond
     (= round-result nil) (play-turn (rest player1-cards) (rest player2-cards) (+ turn 1)
-                                    (concat (first player1-cards) (first player2-cards))))
+                                    (concat (first player1-cards) (first player2-cards)))
     (= winning-card player1-card) (play-turn (update-player-cards player1-cards [player2-card])
                                              (rest player2-cards) (+ turn 1) cards-to-add)
     :else (play-turn (rest player1-cards) (update-player-cards player2-cards [player1-card])
