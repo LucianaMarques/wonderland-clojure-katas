@@ -8,10 +8,6 @@
         rank ranks]
     [suit rank]))
 
-;; my chosen tie criteria:
-;; if one of the players have less than 3 cards available, he/she loses regardless of the other's cards
-;; if both of them face the same situation, the winner is the one with currently more cards
-
 (defn- play-tie-round [card1 card2]
   (println card1)
   (println card2))
@@ -26,11 +22,10 @@
     (and (= suit1 suit2) (= rank1 rank2)) (play-tie-round player1-card player2-card)
     (> rank1 rank2) player1-card
     (< rank1 rank2) player2-card
-    (> suit1 suit2) player1-card
-    :else player2-card))
+    :else nil))
 
-(defn- update-player-cards [player-cards card-to-add]
-  (concat (rest player-cards) [(first player-cards)] [card-to-add]))
+(defn- update-player-cards [player-cards cards-to-add]
+  (concat (rest player-cards) [(first player-cards)] cards-to-add))
 
 (defn- play-turn [player1-cards player2-cards turn]
   (println "Turn " turn)
@@ -40,14 +35,16 @@
   (def player2-card (first player2-cards))
   (def winning-card (play-round player1-card player2-card))
   (println "Winning card " winning-card)
+  (cond
+    (= winning-card nil) )
   (if (= winning-card player1-card)
     (if (empty? (rest player2-cards)) "Player 1 wins"
-                                      (play-turn (update-player-cards player1-cards player2-card)
+                                      (play-turn (update-player-cards player1-cards [player2-card])
                                                  (rest player2-cards)
                                                  (+ turn 1)))
     (if (empty? (rest player1-cards)) "Player 2 wins"
                                       (play-turn (rest player1-cards)
-                                                 (update-player-cards player2-cards player1-card)
+                                                 (update-player-cards player2-cards [player1-card])
                                                  (+ turn 1)))))
 
 (defn play-game [player1-cards player2-cards turn]
