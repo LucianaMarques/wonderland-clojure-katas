@@ -31,7 +31,6 @@
    (first (rest (rest (rest player2-cards))))])
 
 (defn- play-turn [player1-cards player2-cards turn cards-to-add]
-  ()
   (println "Turn " turn)
   (println "Player 1 cards " player1-cards)
   (println "Player 2 cards " player2-cards)
@@ -40,19 +39,24 @@
   (def round-result (play-round player1-card player2-card))
   (println "Round result: " round-result)
   (cond
-    (= round-result nil) (play-turn (rest (rest (rest (rest player1-cards))))
-                                    (rest (rest (rest (rest player2-cards))))
-                                    (+ turn 1)
-                                    (get-tie-cards-to-add player1-cards player2-cards))
-    (= round-result player1-card) ((if (empty? (rest player2-cards))
-                                              "Player 1 wins"
-                                              (play-turn (update-player-cards player1-cards [player2-card])
-                                                         (rest player2-cards) (+ turn 1) [])))
-    :else ((if (empty? (rest player1-cards))
-            "Player 2 wins"
-            (play-turn (rest player1-cards)
-                     (update-player-cards player2-cards (concat player1-card cards-to-add))
-                     (+ turn 1) [])))))
+    (= round-result nil) (cond
+                           (< (count player1-cards) 4) "Player 2 wins"
+                           (< (count player2-cards) 4) "Player 1 wins"
+                           :else (play-turn (rest (rest (rest (rest player1-cards))))
+                                            (rest (rest (rest (rest player2-cards))))
+                                            (+ turn 1)
+                                            (get-tie-cards-to-add player1-cards player2-cards)))
+    (= round-result player1-card) (cond
+                                    (empty? (rest player2-cards)) "Player 1 wins"
+                                    :else (play-turn
+                                               (update-player-cards player1-cards [player2-card])
+                                               (rest player2-cards) (+ turn 1) []))
+    :else (cond
+            (empty? (rest player1-cards)) "Player 2 wins"
+            :else (play-turn
+                   (rest player1-cards)
+                   (update-player-cards player2-cards (concat player1-card cards-to-add))
+                   (+ turn 1) []))))
 
 (defn play-game [player1-cards player2-cards]
   (cond
