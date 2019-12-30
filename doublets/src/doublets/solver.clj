@@ -7,5 +7,10 @@
                (slurp)
                (read-string)))
 
+(defn- get-doublets [word]
+  )
+
 (defn doublets [word1 word2]
-  "make me work")
+  (if (= (count word1) (count word2))
+    (doublets (get-doublet word1) word2)
+    []))
