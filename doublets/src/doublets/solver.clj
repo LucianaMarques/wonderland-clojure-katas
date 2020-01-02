@@ -17,14 +17,16 @@
 (defn- remove-already-visited [visited-words doublets]
   (remove #(some #{%} visited-words) doublets))
 
-(defn- get-doublets [word visited]
+(defn- get-doublets [word target-word visited]
   (->> (filter (fn [w] (and (= (count word) (count w))
                             (= 1 (get-distance word w)))) words)
-       (remove-already-visited visited) (sort-by-distance word)))
+       (remove-already-visited visited) (sort-by-distance target-word)))
 
-(defn doublets [word1 word2]
-  (cond
-    (= (count word1) (count word2)) (if (some #{word2} (get-doublets word1)) word2 [])
-    :else []))
-
-(doublets "look" "lock")
+(defn doublets
+  ([word1 word2] (cond
+                   (= (count word1) (count word2)) (doublets word1 word2 [])
+                   :else []))
+  ([word1 word2 visited]
+   (def word-turn (first (get-doublets word1 word2 visited)))
+   (if (= word2 word-turn) (concat visited [word1 word2])
+                           (doublets word-turn word2 (concat visited [word1])))))
