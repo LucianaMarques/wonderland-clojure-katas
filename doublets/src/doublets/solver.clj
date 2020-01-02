@@ -8,16 +8,16 @@
                (slurp)
                (read-string)))
 
-(defn- differs-by-one-letter [word1 word2]
-  (->> (map = word1 word2) (remove true?) count (= 1)))
+(defn- get-distance [word1 word2]
+  (->> (map = word1 word2) (remove true?) count))
 
 (defn- get-doublets [word]
-  (filter (fn [w] (and (= (count word) (count w)) (differs-by-one-letter word w))) words))
+  (filter (fn [w] (and (= (count word) (count w)) (= 1(get-distance word w)))) words))
 
 (defn doublets [word1 word2]
   (cond
     (= (count word1) (count word2)) (if (some #{word2} (get-doublets word1)) word2 [])
     :else []))
 
-(get-doublets "book")
+(get-doublets "look")
 (doublets "look" "lock")
