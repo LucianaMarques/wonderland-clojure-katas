@@ -31,7 +31,11 @@ For example, to get started on the _alphabet-cipher_ kata first.
 
 ## Recomended sequence
 
-As in `Living Clojure` plan
+You are free to solve all katas in whatever order you choose.
+
+However, as in `Living Clojure` learning plan, the recomended order ir:
+
+* Alphabet Cipher
 
 ## License
 
