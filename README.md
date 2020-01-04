@@ -29,6 +29,9 @@ For example, to get started on the _alphabet-cipher_ kata first.
 4. Check out the alphabet cipher instructions in the _README.md_.
 5. Add the code in the source files to make the tests pass.
 
+## Recomended sequence
+
+As in `Living Clojure` plan
 
 ## License
 
